@@ -17,14 +17,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t danghuan2k3/mgm-training-todo-app:0.0.2 .'
+                sh 'docker build -t danghuan2k3/todo-app:0.0.2 .'
             }
         }
         stage("Docker login and push docker image") {
             steps {
                 withBuildConfiguration {
                     sh 'docker login --username ${repository_username} --password ${repository_password}'
-                    sh 'docker push danghuan2k3/mgm-training-todo-app:0.0.2'        		
+                    sh 'docker push danghuan2k3/todo-app:0.0.2'        		
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
                      sshagent(credentials: [SSH_ID_REF]) {
                          sh '''
                             ssh -o StrictHostKeyChecking=no root@ec2-18-143-167-76.ap-southeast-1.compute.amazonaws.com
-                            "docker run --detach --name todo-app -p 3000:8000 danghuan2k3/mgm-training-todoapp:0.0.2"
+                            docker run --detach --name todo-app -p 3000:8000 danghuan2k3/todoapp:0.0.2"
                             '''
                     }
                 }
