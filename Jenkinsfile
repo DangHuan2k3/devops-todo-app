@@ -31,7 +31,8 @@ pipeline {
                  withBuildConfiguration {
                      sshagent(credentials: [SSH_ID_REF]) {
                          sh '''
-                            docker run --detach --name vitnguyen-todo-app -p 3000:8000 vitnguyen/mgm-training-todoapp:0.0.2"                         '''
+                            docker run --detach --name vitnguyen-todo-app -p 3000:8000 vitnguyen/mgm-training-todoapp:0.0.2
+                            '''
                     }
                 }
             }
