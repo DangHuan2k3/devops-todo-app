@@ -34,6 +34,7 @@ pipeline {
                      sshagent(credentials: [SSH_ID_REF]) {
                          sh '''
                             ssh -o StrictHostKeyChecking=no root@ec2-18-143-167-76.ap-southeast-1.compute.amazonaws.com "docker run --detach --name todo-app -p 3000:8000 danghuan2k3/todo-app:0.0.2"
+                            docker ps
                             '''
                     }
                 }
